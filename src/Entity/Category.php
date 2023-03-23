@@ -21,6 +21,11 @@ class Category
     #[ORM\ManyToMany(targetEntity: Book::class, mappedBy: 'idCategory')]
     private Collection $books;
 
+    public function __toString(): string
+    {
+        return $this->name;
+    }
+
     public function __construct()
     {
         $this->books = new ArrayCollection();

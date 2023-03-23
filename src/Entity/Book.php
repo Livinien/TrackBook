@@ -9,6 +9,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
+
+// ENTITY : CE QUI COMPOSE LA BASE DE DONNÉE
+
 #[ORM\Entity(repositoryClass: BookRepository::class)]
 class Book
 {
@@ -48,6 +51,11 @@ class Book
     #[ORM\ManyToOne(inversedBy: 'books')]
     private ?Box $idBox = null;
 
+    public function __toString(): string
+    {
+        return $this->title;
+    }
+    
     public function __construct()
     {
         $this->idCategory = new ArrayCollection();

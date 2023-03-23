@@ -34,6 +34,11 @@ class Box
     #[ORM\OneToMany(mappedBy: 'idBox', targetEntity: Book::class)]
     private Collection $books;
 
+    public function __toString(): string
+    {
+        return $this->street;
+    }
+
     public function __construct()
     {
         $this->books = new ArrayCollection();

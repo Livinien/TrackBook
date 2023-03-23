@@ -3,6 +3,8 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Borrow;
+use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 
 class BorrowCrudController extends AbstractCrudController
@@ -12,14 +14,16 @@ class BorrowCrudController extends AbstractCrudController
         return Borrow::class;
     }
 
-    /*
+    
     public function configureFields(string $pageName): iterable
     {
         return [
-            IdField::new('id'),
-            TextField::new('title'),
-            TextEditorField::new('description'),
+            //IdField::new('id'),
+            DateField::new('dateBorrow'),
+            DateField::new('dateReturn'),
+            AssociationField::new('idUser'),
+            AssociationField::new('books')
         ];
     }
-    */
+    
 }

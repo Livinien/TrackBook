@@ -17,6 +17,8 @@ use Symfony\Component\Serializer\Exception\NotEncodableValueException;
 class ApiBorrowController extends AbstractController
 {
     
+    // REQUÊTE GET DES EMPREINTS
+    
     #[Route('/api/borrow', name: 'app_api_book_get', methods: "GET")]
     
     public function index(BorrowRepository $borrowRepository, SerializerInterface $serializer): Response
@@ -40,6 +42,7 @@ class ApiBorrowController extends AbstractController
 
     
     
+    // REQUÊTE POST DES EMPREINTS
     
     #[Route('/api/borrow', name: 'app_api_borrow_post', methods: "POST")]
     
@@ -47,7 +50,7 @@ class ApiBorrowController extends AbstractController
     {
         $jsonGet = $request->getContent();
 
-        // Condition qui inclut la déserialization et pour voir si il y a 
+        // Condition qui inclut la déserialization et pour voir si il y a la présence d'information contenant minmum 3 caractères.
         try {
             
             $borrow = $serialization->deserialize($jsonGet, Borrow::class, 'json');
@@ -69,7 +72,6 @@ class ApiBorrowController extends AbstractController
                 'message' => $e->getMessage()
             ], 400);
         }
-
 
         // Déserialization : Récupérer le JSON et le transformer en une entitée
         // On part d'un texte du JSON pour arriver à un tableau associatif ouu d'un tableau PHP

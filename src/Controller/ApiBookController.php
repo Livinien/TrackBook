@@ -17,7 +17,7 @@ use Symfony\Component\Serializer\Exception\NotEncodableValueException;
 class ApiBookController extends AbstractController
 {
 
-    // ROUTE POUR TOUS LES LIVRES
+    // REQUÊTE GET DES LIVRES
     
     #[Route('/api/book', name: 'app_api_book_get', methods: "GET")]
     
@@ -42,7 +42,7 @@ class ApiBookController extends AbstractController
 
 
     
-    // ROUTE POUR L'ID D'UN SEUL LIVRE
+    // REQUÊTE POST DES LIVRES
     
     #[Route('/api/book', name: 'app_api_book_post', methods: "POST")]
     public function bookPost(Request $request, SerializerInterface $serialization, EntityManagerInterface $em, ValidatorInterface $validator): Response
