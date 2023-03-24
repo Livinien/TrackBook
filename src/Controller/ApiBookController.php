@@ -17,11 +17,11 @@ use Symfony\Component\Serializer\Exception\NotEncodableValueException;
 class ApiBookController extends AbstractController
 {
 
-    // REQUÊTE GET DES LIVRES
+    // REQUÊTE GET DES LIVRES POUR RÉCUPÉRER LES LIVRES
     
     #[Route('/api/book', name: 'app_api_book_get', methods: "GET")]
     
-    public function index(BookRepository $bookRepository, SerializerInterface $serializer): Response
+    public function bookGet(BookRepository $bookRepository, SerializerInterface $serializer): Response
     {
 
         // Factoriser la Sérialization
@@ -42,9 +42,9 @@ class ApiBookController extends AbstractController
 
 
     
-    // REQUÊTE POST DES LIVRES
+    // REQUÊTE POST DES LIVRES POUR POSTER DES LIVRES
     
-    #[Route('/api/book', name: 'app_api_book_post', methods: "POST")]
+    #[Route('/api/v1/book', name: 'app_api_book_post', methods: "POST")]
     public function bookPost(Request $request, SerializerInterface $serialization, EntityManagerInterface $em, ValidatorInterface $validator): Response
     {
         $jsonGet = $request->getContent();

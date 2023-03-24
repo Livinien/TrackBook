@@ -28,6 +28,8 @@ class User
     private ?string $avatar = null;
 
     #[ORM\Column(type: Types::GUID)]
+    //#[ORM\GeneratedValue("CUSTOM")]
+    //#[ORM\CustomIdGenerator("doctrine.uuid_generator")]
     private ?string $uuid = null;
 
     #[ORM\Column(type: Types::ARRAY)]

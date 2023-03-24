@@ -17,7 +17,7 @@ class UserCrudController extends AbstractCrudController
     }
 
     
-    // CRÉER UNE UUID AUTOMATIQUEMENT QUE QUAND JE CRÉER UN UTILISATEUR DANS LE DASHBOARD
+    // CRÉATION D'UNE UUID AUTOMATIQUEMENT LORSQUE JE CRÉER UN UTILISATEUR DANS LE DASHBOARD
     public function createEntity(string $entityFqcn)
     {
         $user = new User();
@@ -26,7 +26,7 @@ class UserCrudController extends AbstractCrudController
     }
     
     
-    
+    // PROPRIÉTÉS QUI CONSTITUENT LE DASHBOARD DANS ADMIN
     public function configureFields(string $pageName): iterable
     {
         return [

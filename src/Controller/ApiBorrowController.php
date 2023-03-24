@@ -17,9 +17,9 @@ use Symfony\Component\Serializer\Exception\NotEncodableValueException;
 class ApiBorrowController extends AbstractController
 {
     
-    // REQUÊTE GET DES EMPREINTS
+    // REQUÊTE GET DES EMPREINTS DES LIVRES
     
-    #[Route('/api/borrow', name: 'app_api_book_get', methods: "GET")]
+    #[Route('/api/v1/borrow', name: 'app_api_book_get', methods: "GET")]
     
     public function index(BorrowRepository $borrowRepository, SerializerInterface $serializer): Response
     {
@@ -42,7 +42,7 @@ class ApiBorrowController extends AbstractController
 
     
     
-    // REQUÊTE POST DES EMPREINTS
+    // REQUÊTE POST DES EMPREINTS DES LIVRES
     
     #[Route('/api/borrow', name: 'app_api_borrow_post', methods: "POST")]
     

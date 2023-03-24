@@ -8,12 +8,9 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ApiCategoryController extends AbstractController
 {
-    #[Route('/api/category', name: 'app_api_category')]
-    public function index(): JsonResponse
+    #[Route('/api/v1/category', name: 'app_api_category')]
+    public function index(): Response
     {
-        return $this->json([
-            'message' => 'Welcome to your new controller!',
-            'path' => 'src/Controller/ApiCategoryController.php',
-        ]);
+        
     }
 }
