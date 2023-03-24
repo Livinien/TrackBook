@@ -12,7 +12,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class ApiBoxController extends AbstractController
 {
    
-    // REQUÊTE GET DES LBOX POUR RÉCUPÉRER LES BOX
+    // REQUÊTE GET DES BOX POUR RÉCUPÉRER LES BOX
 
     #[Route('/api/v1/box', name: 'app_api_box_get', methods: "GET")]
     
@@ -25,8 +25,8 @@ class ApiBoxController extends AbstractController
         // Processus de Sérialization
         $box = $boxRepository->findAll();
         
-        // Faire les groupes
-        $json = $serializer->serialize($box, 'json');
+        $json = $serializer->serialize($box, 'json', ['groups' => 'post:read']);
+
 
         $response = new JsonResponse($json, 200, [], true);
 
@@ -35,5 +35,4 @@ class ApiBoxController extends AbstractController
         // Sérialization : On part d'un objet ou d'un tableau associatif PHP et qu'on transform en JSON
 
     }
-
 }
