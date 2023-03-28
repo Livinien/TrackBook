@@ -10,11 +10,12 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Serializer\Exception\NotEncodableValueException;
 
 class ApiUserController extends AbstractController
 {
     #[Route('/api/v1/user/login', name: 'app_api_user', methods: ["POST"])]
-    public function index(UserRepository $userRepository, Request $request, SerializerInterface $serialization): Response
+    public function login(UserRepository $userRepository, Request $request, SerializerInterface $serialization): Response
     {
         // PREMIÈRE METHODE AVEC SymfonyRequest-bundle
         $userId = json_decode($request->getContent(), true);

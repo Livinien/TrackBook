@@ -2,12 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\BookRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
-use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\BookRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 
 // ENTITY : CE QUI COMPOSE LA BASE DE DONNÉE
@@ -18,31 +19,39 @@ class Book
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups("post:read")]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message: "Vous devez mettre obligatoirement un titre")]
     #[Assert\Length(min: 3)]
+    #[Groups("post:read")]
     private ?string $title = null;
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message: "Vous devez mettre obligatoirement un auteur")]
     #[Assert\Length(min: 3)]
+    #[Groups("post:read")]
     private ?string $author = null;
 
     #[ORM\Column]
+    #[Groups("post:read")]
     private ?int $isbn = null;
 
     #[ORM\Column]
+    #[Groups("post:read")]
     private ?bool $isAvailable = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups("post:read")]
     private ?string $cover = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Groups("post:read")]
     private ?string $resume = null;
 
     #[ORM\ManyToOne(inversedBy: 'books')]
+    #[Groups("post:read")]
     private ?Borrow $idBorrow = null;
 
     #[ORM\ManyToMany(targetEntity: Category::class, inversedBy: 'books')]

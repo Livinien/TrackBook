@@ -2,11 +2,12 @@
 
 namespace App\Entity;
 
-use App\Repository\BorrowRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\BorrowRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: BorrowRepository::class)]
 class Borrow
@@ -14,18 +15,23 @@ class Borrow
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups("post:read")]
     private ?int $id = null;
 
     #[ORM\ManyToOne(inversedBy: 'borrows')]
+    #[Groups("post:read")]
     private ?User $idUser = null;
 
     #[ORM\OneToMany(mappedBy: 'idBorrow', targetEntity: Book::class)]
+    #[Groups("post:read")]
     private Collection $books;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Groups("post:read")]
     private ?\DateTimeInterface $dateBorrow = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Groups("post:read")]
     private ?\DateTimeInterface $dateReturn = null;
 
     public function __construct()

@@ -2,12 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\UserRepository;
-use Symfony\Component\Uid\Uuid;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
+use Symfony\Component\Uid\Uuid;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\UserRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
@@ -16,23 +17,29 @@ class User
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups("post:read")]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups("post:read")]
     private ?string $prenom = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups("post:read")]
     private ?string $email = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups("post:read")]
     private ?string $avatar = null;
 
     #[ORM\Column(type: Types::GUID)]
     //#[ORM\GeneratedValue("CUSTOM")]
     //#[ORM\CustomIdGenerator("doctrine.uuid_generator")]
+    #[Groups("post:read")]
     private ?string $uuid = null;
 
     #[ORM\Column(type: Types::ARRAY)]
+    #[Groups("post:read")]
     private array $roles = [];
 
     #[ORM\OneToMany(mappedBy: 'idUser', targetEntity: Borrow::class)]

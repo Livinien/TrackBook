@@ -19,7 +19,7 @@ class ApiBorrowController extends AbstractController
     
     // REQUÊTE GET LES EMPREINTS DES LIVRES
     
-    #[Route('/api/v1/borrow', name: 'app_api_book_get', methods: "GET")]
+    #[Route('/api/v1/borrow/get', name: 'app_api_borrow_get', methods: "GET")]
     
     public function index(BorrowRepository $borrowRepository, SerializerInterface $serializer): Response
     {
@@ -44,7 +44,7 @@ class ApiBorrowController extends AbstractController
     
     // REQUÊTE POST DES EMPREINTS DES LIVRES
     
-    #[Route('/api/borrow', name: 'app_api_borrow_post', methods: "POST")]
+    #[Route('/api/v1/borrow/post', name: 'app_api_borrow_post', methods: "POST")]
     
     public function borrowPost(Request $request, SerializerInterface $serialization, EntityManagerInterface $em, ValidatorInterface $validator): Response
     {
@@ -53,7 +53,7 @@ class ApiBorrowController extends AbstractController
         // Condition qui inclut la déserialization et pour voir si il y a la présence d'information contenant minmum 3 caractères.
         try {
             
-            $borrow = $serialization->deserialize($jsonGet, Borrow::class, 'json');
+            $borrow = $serialization->deserialize($jsonGet, Borrow::class, 'json', ['groups' => 'post:read']);
 
             $errors = $validator->validate($borrow);
 
