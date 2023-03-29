@@ -14,16 +14,19 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Serializer\Exception\NotEncodableValueException;
 
+
+
 class ApiBorrowController extends AbstractController
 {
+
+    // REQUÊTE GET POUR L'EMPRUNT DES LIVRES
     
-    // REQUÊTE GET LES EMPREINTS DES LIVRES
-    
+    // OK
     #[Route('/api/v1/borrow/get', name: 'app_api_borrow_get', methods: "GET")]
     
-    public function index(BorrowRepository $borrowRepository, SerializerInterface $serializer): Response
+    public function borrowGet(BorrowRepository $borrowRepository, SerializerInterface $serializer): Response
     {
-
+        
         // Factoriser la Sérialization
         // return $this->json($bookRepository->findAll(), 200, []);
 
@@ -35,19 +38,18 @@ class ApiBorrowController extends AbstractController
         $response = new JsonResponse($json, 200, [], true);
 
         return $response; 
-        
-        // Sérialization : On part d'un objet ou d'un tableau associatif PHP et qu'on transform en JSON
-
     }
 
     
     
-    // REQUÊTE POST DES EMPREINTS DES LIVRES
+    // REQUÊTE POST POUR L'EMPRUNT DES LIVRES
     
+    // OK
     #[Route('/api/v1/borrow/post', name: 'app_api_borrow_post', methods: "POST")]
     
     public function borrowPost(Request $request, SerializerInterface $serialization, EntityManagerInterface $em, ValidatorInterface $validator): Response
     {
+        
         $jsonGet = $request->getContent();
 
         // Condition qui inclut la déserialization et pour voir si il y a la présence d'information contenant minmum 3 caractères.
@@ -72,9 +74,5 @@ class ApiBorrowController extends AbstractController
                 'message' => $e->getMessage()
             ], 400);
         }
-
-        // Déserialization : Récupérer le JSON et le transformer en une entitée
-        // On part d'un texte du JSON pour arriver à un tableau associatif ouu d'un tableau PHP
-        
     }
 }

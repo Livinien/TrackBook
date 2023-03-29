@@ -9,12 +9,15 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
+
+
 class ApiBoxController extends AbstractController
 {
-   
-    // REQUÊTE GET DES BOX POUR RÉCUPÉRER LES BOX
 
-    #[Route('/api/v1/box', name: 'app_api_box_get', methods: "GET")]
+    // REQUÊTE GET POUR RÉCUPÉRER TOUTES LES BOX
+    
+    // OK
+    #[Route('/api/v1/box/get', name: 'app_api_box_get', methods: "GET")]
     
     public function boxGet(BoxRepository $boxRepository, SerializerInterface $serializer): Response
     {

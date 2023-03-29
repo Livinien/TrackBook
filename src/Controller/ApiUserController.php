@@ -12,14 +12,36 @@ use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Serializer\Exception\NotEncodableValueException;
 
+
+
 class ApiUserController extends AbstractController
 {
+
+    // RÉCUPÉRER TOUS LES UTILISATEURS DE L'APPLICATION
+    
+    // OK
+    #[Route('/api/v1/users', name: 'app_api_users', methods: ["GET"])]
+    public function users(UserRepository $userRepository, Request $request, SerializerInterface $serialization): Response
+    {
+        $users = $this->getDoctrine()
+            ->getRepository(User::class)
+            ->findAll();
+
+        $json = $serialization->serialize($users, "json", ['groups' => 'post:read']);
+    
+        $response = new Response($json, 200, ["Content-Type" => "application/json"]);
+        return $response;
+    }
+    
+
+
+    
+    // S'IDENTIFIER EN TANT QU'UTILISATEUR SUR L'APPLICATION / SE LOGUER
+    
+    // OK
     #[Route('/api/v1/user/login', name: 'app_api_user', methods: ["POST"])]
     public function login(UserRepository $userRepository, Request $request, SerializerInterface $serialization): Response
     {
-        // PREMIÈRE METHODE AVEC SymfonyRequest-bundle
-        $userId = json_decode($request->getContent(), true);
-        $uuid = $userId["uuid"];
         
         // DEUXIÈME METHODE AVEC SymfonyRequest-bundle
         $uuid = $request->get("uuid");
@@ -37,6 +59,7 @@ class ApiUserController extends AbstractController
             $response = new Response($json, 200, ["Content-Type" => "application/json"]);
             return $response;
             
+            // En cas d'erreur si la condition ne fonctionne pas
         } catch(NotEncodableValueException $e) {
             return $this->json([
                 'status' => 400,
