@@ -1,0 +1,10 @@
+{
+  "expo": {
+    "scheme": "acme",
+    "web": {
+      "bundler": "metro"
+    },
+    "name": "Box_Book_2",
+    "slug": "Box_Book_2"
+  }
+}
