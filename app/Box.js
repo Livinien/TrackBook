@@ -2,15 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Pressable, Image } from 'react-native';
 import { Link } from "expo-router";
 import { useSearchParams } from "expo-router";
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 
-
-// SCANNER LE LIVRE
+// SCANNER LA BOÎTE À LIVRE
 export default function Button(props) {
-  const { onPress, title = 'SCANNER UN LIVRE' } = props;
+  const { onPress, title = 'EMPRUNTER UN LIVRE' } = props;
   const { id } = useSearchParams();
 
   const [box, setBox] = useState([]);
-  const url = "https://tasty-signs-follow-193-252-172-28.loca.lt";
+  const url = "https://solid-houses-smile-193-252-172-28.loca.lt";
 
     useEffect(() => {
         fetch(url + "/api/v1/box?id=" + id
@@ -32,14 +33,17 @@ export default function Button(props) {
   return (
     <View style={styles.background}>
       <Text style={styles.title}>Vous avez scanner la box :</Text>
-      <Text style={styles.subtitle1}>{box.street}</Text>
+      <Text style={styles.subtitle1}>{box.street}{box.zipcode}{box.city}</Text>
       <Image style={styles.image} source={require('../assets/images/boite_a_livre.png')}/>
       <Text style={styles.subtitle2}>Vous pouvez dès à présent scanner votre livre</Text>
+      <Pressable style={styles.maps}>
+        <Link href={{ pathname: 'QrcodeScan', params: { pathname: 'ReturnBook' }}} style={styles.text}><MaterialCommunityIcons name="book-arrow-left" size={24}/> RENDRE UN LIVRE</Link>
+      </Pressable>
       <Pressable style={styles.button} onPress={onPress}>
-        <Link href={{ pathname: 'QrcodeScan', params: { pathname: 'Book' }}} style={styles.text}>{title}</Link>
+        <Link href={{ pathname: 'QrcodeScan', params: { pathname: 'Book' }}} style={styles.text}><MaterialCommunityIcons name="book-open-variant" size={24}/> {title}</Link>
       </Pressable>
       <Pressable style={styles.previous}>
-        <Link href={{ pathname: 'Profil', params: { pathname: 'Profil' }}} style={styles.text}>RETOURNEZ EN ARRIÈRE</Link>
+        <Link href={{ pathname: 'Profil', params: { pathname: 'Profil' }}} style={styles.text}><Ionicons name="ios-arrow-back-circle-sharp" size={24}/> RETOUR EN ARRIÈRE</Link>
       </Pressable>
     </View>
   );
@@ -56,6 +60,7 @@ const styles = StyleSheet.create({
 
   title: {
     marginTop: 130,
+    marginBottom: 20,
     fontSize: 20,
     fontWeight: "bold",
   },
@@ -77,7 +82,7 @@ const styles = StyleSheet.create({
   image: {
     width: 400,
     height: 300,
-    marginTop: 50,
+    marginTop: 10,
     marginLeft: 37,
   },
 
@@ -90,6 +95,7 @@ const styles = StyleSheet.create({
     marginBottom: '50%',
     marginTop: '30%',
     borderRadius: '5%',
+    padding: 10,
     elevation: 3,
     shadowColor: "#000000",
         shadowOffset: {
@@ -105,6 +111,28 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     letterSpacing: 0.25,
     color: '#fff',
+  },
+
+  maps: {
+    width: 285,
+    fontSize: 20,
+    fontWeight: 'bold',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: -85,
+    marginTop: 35,
+    padding: 10,
+    letterSpacing: 0.25,
+    backgroundColor: '#9957ff',
+    color: '#fff',
+    borderRadius: 5,
+    shadowColor: "#000000",
+        shadowOffset: {
+          width: 0,
+          height: 0,
+        },
+        shadowOpacity:  0.99,
+        shadowRadius: 3.05,
   },
 
   previous: {

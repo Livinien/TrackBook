@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, Pressable, Image } from 'react-native';
 import { Link } from "expo-router";
-
+import { FontAwesome5 } from '@expo/vector-icons';
 
 // ACCUEIL DE L'APPLICATION
 export default function Button(props) {
@@ -12,7 +12,7 @@ export default function Button(props) {
       <Text style={styles.subtitle}>Commencer à emprunter vos livres préférés.</Text>
       <Image style={styles.image} source={require('../assets/images/vector_books.png')}/>
       <Pressable style={styles.button} onPress={onPress}>
-        <Link href={{ pathname: 'QrcodeScan', params: { pathname: 'Profil' }}} style={styles.text}>{title}</Link>
+        <Link href={{ pathname: 'QrcodeScan', params: { pathname: 'Profil' }}} style={styles.text}><FontAwesome5 name="user-alt" size={24}/> {title}</Link>
       </Pressable>
     </View>
   );
@@ -36,6 +36,13 @@ const styles = StyleSheet.create({
     marginTop: 150,
     fontSize: 54,
     fontWeight: "bold",
+    shadowColor: "#000000",
+        shadowOffset: {
+          width: 0,
+          height: 0,
+        },
+        shadowOpacity:  0.80,
+        shadowRadius: 2.05,
   },
 
   subtitle: {

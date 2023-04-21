@@ -1,35 +1,38 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Pressable } from 'react-native';
+import { View, Text, StyleSheet, Pressable, Image } from 'react-native';
 import { Link } from "expo-router";
-import { Image } from 'expo-image';
 import { useSearchParams } from "expo-router";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 
-// SCANNER UN AUTRE LIVRE
+
 export default function Button(props) {
-  const { onPress, title = 'RESCANNER UN LIVRE' } = props;
+  const { onPress, title = 'EMPRUNTER UN LIVRE' } = props;
   const { id } = useSearchParams();
 
+  // SCANNER LE LIVRE POUR LE REMETTRE DANS BOÎTE À LIVRE
   const [book, setBook] = useState([]);
+  const [returnBook, setReturnBook] = useState([]);
   const url = "https://solid-houses-smile-193-252-172-28.loca.lt";
 
-    // EMPRUNTER UN LIVRE
     useEffect(() => {
-        fetch(url + "/api/v1/book?id=1&idBook=" + id
+        fetch(url + "/api/v1/bookReturn/" + id
             , {
-                method:'POST',
+                method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Access-Control-Request-Method': 'POST',
+                    'Access-Control-Request-Method': 'PATCH',
                     'Access-Control-Request-Headers': 'Content-Type, Authorization'
                 }})
             .then((response) => response.json())
+            .then((json) => {
+                setReturnBook(json);
+            })
             .catch((error) => console.error(error));
     }, []);
 
 
-    // AFFICHER LES CARACTÉRISTIQUES DU LIVRE
+    // AFFICHER LE TITRE DU LIVRE
     useEffect(() => {
         fetch(url + "/api/v1/bookInfo?id=" + id
             , {
@@ -46,14 +49,12 @@ export default function Button(props) {
             .catch((error) => console.error(error));
     }, []);
 
+
   return (
     <View style={styles.background}>
-      <Text style={styles.title1}>Vous avez scanner le livre :</Text>
-      <Text style={styles.title2}>{book.title}</Text>
-      <Image style={styles.image} source={"https://solid-houses-smile-193-252-172-28.loca.lt/assets/uploads/" + book.cover}/>
-      <Pressable style={styles.maps}>
-        <Link href={{ pathname: 'QrcodeScan', params: { pathname: 'ReturnBook' }}} style={styles.text}><MaterialCommunityIcons name="book-arrow-left" size={24}/> RENDRE UN LIVRE</Link>
-      </Pressable>
+      <Text style={styles.title}>Votre livre {book.title} a bien été rendu</Text>
+      <Image style={styles.image} source={require('../assets/images/rendre_un_livre.png')}/>
+      <Text style={styles.subtitle2}>Vous avez la possibilité de scanner un autre livre.</Text>
       <Pressable style={styles.button} onPress={onPress}>
         <Link href={{ pathname: 'QrcodeScan', params: { pathname: 'Book' }}} style={styles.text}><MaterialCommunityIcons name="book-open-variant" size={24}/> {title}</Link>
       </Pressable>
@@ -73,28 +74,24 @@ const styles = StyleSheet.create({
     backgroundColor: "#cdefff",
   },
 
-  title1: {
-    marginTop: 110,
+  title: {
+    marginTop: 130,
+    marginBottom: 50,
     fontSize: 20,
     fontWeight: "bold",
   },
 
-  title2: {
+  subtitle2: {
     marginTop: 30,
-    fontSize: 20,
-    fontWeight: "bold",
-  },
-
-  subtitle: {
     fontSize: 15,
+    fontWeight: 'bold',
     color: "#38434D",
   },
 
   image: {
-    width: 300,
-    height: 330,
-    marginTop: 25,
-    borderRadius: '5%',
+    width: 400,
+    height: 300,
+    marginTop: 10,
   },
 
   button: {
@@ -104,7 +101,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#008fd1',
     padding: '2%',
     marginBottom: '50%',
-    marginTop: '9%',
+    marginTop: '15%',
     borderRadius: '5%',
     padding: 10,
     elevation: 3,
@@ -130,7 +127,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: -5,
+    marginBottom: -85,
     marginTop: 35,
     padding: 10,
     letterSpacing: 0.25,

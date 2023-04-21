@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Pressable, Image } from 'react-native';
 import { Link } from "expo-router";
+import { AntDesign } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 
 
 // ACCÈS À LA PAGE PROFIL DE L'UTILISATEUR POUR SCANNER LE QRCODE DE LA BOX
@@ -10,7 +13,7 @@ export default function Button(props) {
   //const {id} = useSearchParams();
 
   const [users, setUser] = useState([]);
-  const url = "https://tasty-signs-follow-193-252-172-28.loca.lt";
+  const url = "https://solid-houses-smile-193-252-172-28.loca.lt";
 
     useEffect(() => {
         fetch(url + "/api/v1/user/login?uuid=d4cab748-3224-49c3-a25d-4edfb39b1fd3"
@@ -35,13 +38,13 @@ export default function Button(props) {
       <Text style={styles.subtitle}>Vous pouvez dès à présent scanner votre box</Text>
       <Image style={styles.image} source={require('../assets/images/profil.png')}/>
       <Pressable style={styles.maps}>
-        <Link href={{ pathname: 'QrcodeScan', params: { pathname: 'Box' }}} style={styles.text}>TROUVER VOTRE BOX</Link>
+        <Link href={{ pathname: 'Maps', params: { pathname: 'Maps' }}} style={styles.text}><AntDesign name="enviroment" size={24}/> TROUVER VOTRE BOX</Link>
       </Pressable>
       <Pressable style={styles.button} onPress={onPress}>
-        <Link href={{ pathname: 'QrcodeScan', params: { pathname: 'Box' }}} style={styles.text}>{title}</Link>
+        <Link href={{ pathname: 'QrcodeScan', params: { pathname: 'Box' }}} style={styles.text}><MaterialCommunityIcons name="book-open-variant" size={24}/> {title}</Link>
       </Pressable>
       <Pressable style={styles.previous}>
-        <Link href={{ params: { pathname: 'index' }}} style={styles.text}>RETOURNEZ EN ARRIÈRE</Link>
+        <Link href={{ params: { pathname: 'index' }}} style={styles.text}><Ionicons name="ios-arrow-back-circle-sharp" size={24}/> RETOUR EN ARRIÈRE</Link>
       </Pressable>
     </View>
   );
@@ -72,7 +75,6 @@ const styles = StyleSheet.create({
     marginTop: 40,
     width: 380,
     height: 300,
-    
   },
 
   button: {
@@ -84,6 +86,7 @@ const styles = StyleSheet.create({
     marginBottom: '50%',
     marginTop: '30%',
     borderRadius: '5%',
+    padding: 10,
     elevation: 3,
     shadowColor: "#000000",
         shadowOffset: {
@@ -108,7 +111,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: -85,
-    marginTop: 80,
+    marginTop: 50,
     padding: 10,
     letterSpacing: 0.25,
     backgroundColor: '#9957ff',
