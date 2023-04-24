@@ -50,10 +50,12 @@ export default function App() {
               <View>
                 <View style={styles.bubble}>
                   <Link href={{ pathname: 'Box', params: { pathname: 'Box' }}}><Text style={styles.name}>Boite à livre Grand Place (Grenoble)</Text></Link>
-                  <Image 
+                  
+                  <Link href={{ pathname: 'Box', params: { pathname: 'Box' }}}><Image 
                   style={styles.image}
                   source={require('../assets/images/boite_a_livre_maps.jpg')}
-                  />
+                  /></Link>
+                  
                 </View>
                 <View style={styles.arrowBorder1}></View>
               </View>
@@ -111,6 +113,6 @@ link: {
     marginTop: 10,
     width: 120,
     height: 80,
+    borderRadius: 5,
   },
-
 });
