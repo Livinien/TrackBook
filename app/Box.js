@@ -10,11 +10,12 @@ export default function Button(props) {
   const { onPress, title = 'EMPRUNTER UN LIVRE' } = props;
   const { id } = useSearchParams();
 
+
   const [box, setBox] = useState([]);
-  const url = "https://solid-houses-smile-193-252-172-28.loca.lt";
+  const url = "https://rude-birds-float-193-252-172-28.loca.lt";
 
     useEffect(() => {
-        fetch(url + "/api/v1/box?id=" + id
+        fetch(url + "/api/v1/box/" + id
             , {
                 method: 'GET',
                 headers: {
@@ -33,7 +34,7 @@ export default function Button(props) {
   return (
     <View style={styles.background}>
       <Text style={styles.title}>Vous avez scanner la box :</Text>
-      <Text style={styles.subtitle1}>{box.street}{box.zipcode}{box.city}</Text>
+      <Text style={styles.subtitle1}>{box.street} {box.city} {box.zipcode}</Text>
       <Image style={styles.image} source={require('../assets/images/boite_a_livre.png')}/>
       <Text style={styles.subtitle2}>Vous pouvez dès à présent scanner votre livre</Text>
       <Pressable style={styles.maps}>
@@ -66,7 +67,7 @@ const styles = StyleSheet.create({
   },
 
   subtitle1: {
-    marginTop: 15,
+    marginBottom: 10,
     fontSize: 15,
     fontWeight: "bold",
     color: "#38434D",
