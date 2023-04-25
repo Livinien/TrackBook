@@ -11,7 +11,7 @@ export default function Button(props) {
   const { onPress, title = 'SCANNER VOTRE BOX' } = props;
 
   const [users, setUser] = useState([]);
-  const url = "https://rude-birds-float-193-252-172-28.loca.lt";
+  const url = "https://nine-peaches-argue-193-252-172-28.loca.lt";
 
     useEffect(() => {
         fetch(url + "/api/v1/user/login?uuid=d4cab748-3224-49c3-a25d-4edfb39b1fd3"

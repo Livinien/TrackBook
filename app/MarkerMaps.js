@@ -5,36 +5,18 @@ import { useSearchParams } from "expo-router";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 
-
+// SCANNER LA BOÎTE À LIVRE
 export default function Button(props) {
   const { onPress, title = 'EMPRUNTER UN LIVRE' } = props;
   const { id } = useSearchParams();
+  const { street } = useSearchParams();
 
-  // SCANNER LE LIVRE POUR LE REMETTRE DANS BOÎTE À LIVRE
-  const [book, setBook] = useState([]);
-  const [returnBook, setReturnBook] = useState([]);
+
+  const [box, setBox] = useState([]);
   const url = "https://nine-peaches-argue-193-252-172-28.loca.lt";
 
     useEffect(() => {
-        fetch(url + "/api/v1/bookReturn/" + id
-            , {
-                method: 'PATCH',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Access-Control-Request-Method': 'PATCH',
-                    'Access-Control-Request-Headers': 'Content-Type, Authorization'
-                }})
-            .then((response) => response.json())
-            .then((json) => {
-                setReturnBook(json);
-            })
-            .catch((error) => console.error(error));
-    }, []);
-
-
-    // AFFICHER LE TITRE DU LIVRE
-    useEffect(() => {
-        fetch(url + "/api/v1/bookInfo?id=" + id
+        fetch(url + "/api/v1/box/" + id
             , {
                 method: 'GET',
                 headers: {
@@ -44,7 +26,7 @@ export default function Button(props) {
                 }})
             .then((response) => response.json())
             .then((json) => {
-                setBook(json);
+                setBox(json);
             })
             .catch((error) => console.error(error));
     }, []);
@@ -52,14 +34,18 @@ export default function Button(props) {
 
   return (
     <View style={styles.background}>
-      <Text style={styles.title}>Votre livre {book.title} a bien été rendu</Text>
-      <Image style={styles.image} source={require('../assets/images/rendre_un_livre.png')}/>
-      <Text style={styles.subtitle2}>Vous avez la possibilité de scanner un autre livre.</Text>
+      <Text style={styles.title}>Vous êtes à la box :</Text>
+      <Text style={styles.subtitle1}>{street}</Text>
+      <Image style={styles.image} source={require('../assets/images/markerMaps.png')}/>
+      <Text style={styles.subtitle2}>Vous pouvez dès à présent scanner votre livre</Text>
+      <Pressable style={styles.maps}>
+        <Link href={{ pathname: 'QrcodeScan', params: { pathname: 'ReturnBook' }}} style={styles.text}><MaterialCommunityIcons name="book-arrow-left" size={24}/> RENDRE UN LIVRE</Link>
+      </Pressable>
       <Pressable style={styles.button} onPress={onPress}>
         <Link href={{ pathname: 'QrcodeScan', params: { pathname: 'Book' }}} style={styles.text}><MaterialCommunityIcons name="book-open-variant" size={24}/> {title}</Link>
       </Pressable>
       <Pressable style={styles.previous}>
-        <Link href={{ pathname: 'Box', params: { pathname: 'Box' }}} style={styles.text}><Ionicons name="ios-arrow-back-circle-sharp" size={24}/> RETOUR EN ARRIÈRE</Link>
+        <Link href={{ pathname: 'Profil', params: { pathname: 'Profil' }}} style={styles.text}><Ionicons name="ios-arrow-back-circle-sharp" size={24}/> RETOUR EN ARRIÈRE</Link>
       </Pressable>
     </View>
   );
@@ -76,22 +62,30 @@ const styles = StyleSheet.create({
 
   title: {
     marginTop: 130,
-    marginBottom: 50,
+    marginBottom: 20,
     fontSize: 20,
     fontWeight: "bold",
   },
 
+  subtitle1: {
+    marginBottom: 10,
+    fontSize: 15,
+    fontWeight: "bold",
+    color: "#38434D",
+  },
+
   subtitle2: {
-    marginTop: 30,
+    marginTop: 20,
     fontSize: 15,
     fontWeight: 'bold',
     color: "#38434D",
   },
 
   image: {
-    width: 400,
+    width: 415,
     height: 300,
     marginTop: 10,
+    marginLeft: 37,
   },
 
   button: {
@@ -101,7 +95,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#008fd1',
     padding: '2%',
     marginBottom: '50%',
-    marginTop: '15%',
+    marginTop: '30%',
     borderRadius: '5%',
     padding: 10,
     elevation: 3,

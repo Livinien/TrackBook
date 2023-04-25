@@ -12,7 +12,7 @@ export default function Button(props) {
 
 
   const [box, setBox] = useState([]);
-  const url = "https://rude-birds-float-193-252-172-28.loca.lt";
+  const url = "https://nine-peaches-argue-193-252-172-28.loca.lt";
 
     useEffect(() => {
         fetch(url + "/api/v1/box/" + id

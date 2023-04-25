@@ -9,6 +9,43 @@ import * as Location from 'expo-location';
 // CARTE DE L'EMPLACEMENT DE LA BOITE À LIVRE
 export default function App() {
 
+  const [markers, setMarker] = useState([]);
+  const url = "https://nine-peaches-argue-193-252-172-28.loca.lt";
+
+    useEffect(() => {
+        fetch(url + "/api/v1/box/get"
+            , {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Request-Method': 'GET',
+                    'Access-Control-Request-Headers': 'Content-Type, Authorization'
+                }})
+            .then((response) => response.json())
+            .then((json) => {
+
+              const markers = [];
+              for (let i = 0; i < json.length; i++) {
+                  const box = json[i];
+                  const marker = {
+                      latlng: {
+                          latitude: box.geoLoc['1'],
+                          longitude: box.geoLoc['2']
+                      },
+                      title: box.street + ', ' + box.zipcode + ' ' + box.city,
+                      capacity: box.capacity,
+                      id: box.id
+                  }
+                  markers.push(marker);
+              }
+                setMarker(markers);
+            })
+            .catch((error) => console.error(error));
+    }, []);
+    console.log(markers);
+
+
+
     const [mapRegion, setMapRegion] = useState({
         latitude: 45.187717078351,
         longitude: 5.729055406837805,
@@ -42,18 +79,22 @@ export default function App() {
       <MapView style={styles.map}
         region={mapRegion}
       >
-        <Marker 
-          coordinate={mapRegion} 
-          title='Boite à Livre à Grand Place'>
-          
-          <Callout tooltip>
+        {markers.map(marker => (
+        <Marker key={marker.id}
+                    coordinate={{
+                        latitude: parseFloat(marker.latlng.latitude),
+                        longitude: parseFloat(marker.latlng.longitude),}}
+                  
+                    description={'Capacity: ' + marker.capacity} >
+
+            <Callout tooltip>
               <View>
                 <View style={styles.bubble}>
-                  <Link href={{ pathname: 'Box', params: { pathname: 'Box' }}}><Text style={styles.name}>Boite à livre Grand Place (Grenoble)</Text></Link>
+                  <Link href={{ pathname: 'MarkerMaps', params: { pathname: 'MarkerMaps', street: marker.title }}}><Text style={styles.name}>{marker.title}</Text></Link>
                   
-                  <Link href={{ pathname: 'Box', params: { pathname: 'Box' }}}><Image 
+                  <Link href={{ pathname: 'MarkerMaps', params: { pathname: 'MarkerMaps', street: marker.title }}} style={styles.imageLink}><Image 
                   style={styles.image}
-                  source={require('../assets/images/boite_a_livre_maps.jpg')}
+                  source={require('../assets/images/markerImage.png')}
                   /></Link>
                   
                 </View>
@@ -61,6 +102,7 @@ export default function App() {
               </View>
           </Callout>
         </Marker>
+      ))}
       </MapView>
     </View>
   );
@@ -109,10 +151,20 @@ link: {
     marginTop: -2,
   },
 
+  name: {
+    marginTop: 10,
+    height: 100,
+  },
+
+  imageLink: {
+    marginTop: 10,
+    borderRadius: 5,
+  },
+
   image: {
     marginTop: 10,
     width: 120,
-    height: 80,
+    height: 100,
     borderRadius: 5,
   },
 });
