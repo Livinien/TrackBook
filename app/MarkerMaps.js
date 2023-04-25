@@ -45,7 +45,7 @@ export default function Button(props) {
         <Link href={{ pathname: 'QrcodeScan', params: { pathname: 'Book' }}} style={styles.text}><MaterialCommunityIcons name="book-open-variant" size={24}/> {title}</Link>
       </Pressable>
       <Pressable style={styles.previous}>
-        <Link href={{ pathname: 'Profil', params: { pathname: 'Profil' }}} style={styles.text}><Ionicons name="ios-arrow-back-circle-sharp" size={24}/> RETOUR EN ARRIÈRE</Link>
+        <Link href={{ pathname: 'Maps', params: { pathname: 'Maps' }}} style={styles.text}><Ionicons name="ios-arrow-back-circle-sharp" size={24}/> RETOUR EN ARRIÈRE</Link>
       </Pressable>
     </View>
   );
