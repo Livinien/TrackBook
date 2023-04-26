@@ -51,7 +51,6 @@ class Book
     private ?string $resume = null;
 
     #[ORM\ManyToOne(inversedBy: 'books')]
-    #[Groups("post:read")]
     private ?Borrow $idBorrow = null;
 
     #[ORM\ManyToMany(targetEntity: Category::class, inversedBy: 'books')]

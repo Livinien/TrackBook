@@ -39,7 +39,7 @@ class ApiUserController extends AbstractController
     // S'IDENTIFIER EN TANT QU'UTILISATEUR SUR L'APPLICATION / SE LOGUER
     
     // OK
-    #[Route('/api/v1/user/login', name: 'app_api_user', methods: ["POST"])]
+    #[Route('/api/v1/user/login', name: 'app_api_user', methods: ["GET"])]
     public function login(UserRepository $userRepository, Request $request, SerializerInterface $serialization): Response
     {
         
@@ -54,7 +54,7 @@ class ApiUserController extends AbstractController
                     return $this->json(["error" => "Utilisateur Inexistant"], 200);
                 }
     
-            $json = $serialization->serialize($user, "json");
+            $json = $serialization->serialize($user, "json", ['groups' => 'post:read']);
     
             $response = new Response($json, 200, ["Content-Type" => "application/json"]);
             return $response;
