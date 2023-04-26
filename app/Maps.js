@@ -10,7 +10,7 @@ import * as Location from 'expo-location';
 export default function App() {
 
   const [markers, setMarker] = useState([]);
-  const url = "https://nine-peaches-argue-193-252-172-28.loca.lt";
+  const url = "https://clean-badgers-care-193-252-172-28.loca.lt";
 
     useEffect(() => {
         fetch(url + "/api/v1/box/get"

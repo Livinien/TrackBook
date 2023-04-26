@@ -12,7 +12,7 @@ export default function Button(props) {
   const { id } = useSearchParams();
 
   const [book, setBook] = useState([]);
-  const url = "https://nine-peaches-argue-193-252-172-28.loca.lt";
+  const url = "https://clean-badgers-care-193-252-172-28.loca.lt";
 
     // EMPRUNTER UN LIVRE
     useEffect(() => {
@@ -50,7 +50,7 @@ export default function Button(props) {
     <View style={styles.background}>
       <Text style={styles.title1}>Vous avez scanner le livre :</Text>
       <Text style={styles.title2}>{book.title}</Text>
-      <Image style={styles.image} source={"https://nine-peaches-argue-193-252-172-28.loca.lt/assets/uploads/" + book.cover}/>
+      <Image style={styles.image} source={"https://clean-badgers-care-193-252-172-28.loca.lt/assets/uploads/" + book.cover}/>
       <Pressable style={styles.maps}>
         <Link href={{ pathname: 'QrcodeScan', params: { pathname: 'ReturnBook' }}} style={styles.text}><MaterialCommunityIcons name="book-arrow-left" size={24}/> RENDRE UN LIVRE</Link>
       </Pressable>

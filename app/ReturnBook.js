@@ -13,7 +13,7 @@ export default function Button(props) {
   // SCANNER LE LIVRE POUR LE REMETTRE DANS BOÎTE À LIVRE
   const [book, setBook] = useState([]);
   const [returnBook, setReturnBook] = useState([]);
-  const url = "https://nine-peaches-argue-193-252-172-28.loca.lt";
+  const url = "https://clean-badgers-care-193-252-172-28.loca.lt";
 
     useEffect(() => {
         fetch(url + "/api/v1/bookReturn/" + id
@@ -52,7 +52,7 @@ export default function Button(props) {
 
   return (
     <View style={styles.background}>
-      <Text style={styles.title}>Votre livre {book.title} a bien été rendu</Text>
+      <Text style={styles.title}>Votre livre : {book.title} a bien été rendu</Text>
       <Image style={styles.image} source={require('../assets/images/rendre_un_livre.png')}/>
       <Text style={styles.subtitle2}>Vous avez la possibilité de scanner un autre livre.</Text>
       <Pressable style={styles.button} onPress={onPress}>
@@ -75,6 +75,7 @@ const styles = StyleSheet.create({
   },
 
   title: {
+    justifyContent: "center",
     marginTop: 130,
     marginBottom: 50,
     fontSize: 20,
