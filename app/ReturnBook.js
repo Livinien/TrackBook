@@ -13,7 +13,7 @@ export default function Button(props) {
   // SCANNER LE LIVRE POUR LE REMETTRE DANS BOÎTE À LIVRE
   const [book, setBook] = useState([]);
   const [returnBook, setReturnBook] = useState([]);
-  const url = "https://clean-badgers-care-193-252-172-28.loca.lt";
+  const url = "https://mean-heads-flow-193-252-172-28.loca.lt";
 
     useEffect(() => {
         fetch(url + "/api/v1/bookReturn/" + id
@@ -52,7 +52,9 @@ export default function Button(props) {
 
   return (
     <View style={styles.background}>
-      <Text style={styles.title}>Votre livre : {book.title} a bien été rendu</Text>
+      <Text style={styles.title1}>Votre livre :</Text>
+      <Text style={styles.title2}>{book.title}</Text>
+      <Text style={styles.title3}>a bien été rendu</Text>
       <Image style={styles.image} source={require('../assets/images/rendre_un_livre.png')}/>
       <Text style={styles.subtitle2}>Vous avez la possibilité de scanner un autre livre.</Text>
       <Pressable style={styles.button} onPress={onPress}>
@@ -74,25 +76,50 @@ const styles = StyleSheet.create({
     backgroundColor: "#cdefff",
   },
 
-  title: {
+  title1: {
     justifyContent: "center",
-    marginTop: 130,
-    marginBottom: 50,
+    marginTop: 90,
+    marginBottom: 10,
+    margin: 40,
+    fontSize: 20,
+    fontWeight: "bold",
+  },
+  
+  title2: {
+    justifyContent: "center",
+    marginTop: 10,
+    marginBottom: 5,
+    margin: 40,
+    fontSize: 20,
+    fontWeight: "bold",
+  },
+
+  title3: {
+    justifyContent: "center",
+    marginTop: 15,
+    margin: 20,
     fontSize: 20,
     fontWeight: "bold",
   },
 
   subtitle2: {
-    marginTop: 30,
+    marginTop: 10,
     fontSize: 15,
     fontWeight: 'bold',
     color: "#38434D",
   },
 
   image: {
-    width: 400,
+    width: 360,
     height: 300,
     marginTop: 10,
+  },
+
+  text: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    letterSpacing: 0.25,
+    color: '#fff',
   },
 
   button: {
@@ -113,13 +140,6 @@ const styles = StyleSheet.create({
         },
         shadowOpacity:  0.99,
         shadowRadius: 3.05,
-  },
-
-  text: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    letterSpacing: 0.25,
-    color: '#fff',
   },
 
   maps: {

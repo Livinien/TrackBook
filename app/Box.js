@@ -12,7 +12,7 @@ export default function Button(props) {
 
 
   const [box, setBox] = useState([]);
-  const url = "https://clean-badgers-care-193-252-172-28.loca.lt";
+  const url = "https://mean-heads-flow-193-252-172-28.loca.lt";
 
     useEffect(() => {
         fetch(url + "/api/v1/box/" + id
@@ -37,11 +37,11 @@ export default function Button(props) {
       <Text style={styles.subtitle1}>{box.street} {box.city} {box.zipcode}</Text>
       <Image style={styles.image} source={require('../assets/images/boite_a_livre.png')}/>
       <Text style={styles.subtitle2}>Vous pouvez dès à présent scanner votre livre</Text>
-      <Pressable style={styles.maps}>
-        <Link href={{ pathname: 'QrcodeScan', params: { pathname: 'ReturnBook' }}} style={styles.text}><MaterialCommunityIcons name="book-arrow-left" size={24}/> RENDRE UN LIVRE</Link>
-      </Pressable>
       <Pressable style={styles.button} onPress={onPress}>
         <Link href={{ pathname: 'QrcodeScan', params: { pathname: 'Book' }}} style={styles.text}><MaterialCommunityIcons name="book-open-variant" size={24}/> {title}</Link>
+      </Pressable>
+      <Pressable style={styles.maps}>
+        <Link href={{ pathname: 'QrcodeScan', params: { pathname: 'ReturnBook' }}} style={styles.text}><MaterialCommunityIcons name="book-arrow-left" size={24}/> RENDRE UN LIVRE</Link>
       </Pressable>
       <Pressable style={styles.previous}>
         <Link href={{ pathname: 'Profil', params: { pathname: 'Profil' }}} style={styles.text}><Ionicons name="ios-arrow-back-circle-sharp" size={24}/> RETOUR EN ARRIÈRE</Link>
@@ -87,14 +87,21 @@ const styles = StyleSheet.create({
     marginLeft: 37,
   },
 
+  text: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    letterSpacing: 0.25,
+    color: '#fff',
+  },
+
   button: {
     width: '76%',
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#008fd1',
+    marginTop: 40,
+    marginBottom: -6,
     padding: '2%',
-    marginBottom: '50%',
-    marginTop: '30%',
     borderRadius: '5%',
     padding: 10,
     elevation: 3,
@@ -105,13 +112,6 @@ const styles = StyleSheet.create({
         },
         shadowOpacity:  0.99,
         shadowRadius: 3.05,
-  },
-
-  text: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    letterSpacing: 0.25,
-    color: '#fff',
   },
 
   maps: {
@@ -142,8 +142,8 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: 95,
-    marginTop: -160,
+    marginBottom: 100,
+    marginTop: 115,
     padding: 10,
     letterSpacing: 0.25,
     backgroundColor: 'green',

@@ -13,7 +13,7 @@ export default function Button(props) {
 
 
   const [box, setBox] = useState([]);
-  const url = "https://clean-badgers-care-193-252-172-28.loca.lt";
+  const url = "https://mean-heads-flow-193-252-172-28.loca.lt";
 
     useEffect(() => {
         fetch(url + "/api/v1/box/" + id
@@ -38,11 +38,11 @@ export default function Button(props) {
       <Text style={styles.subtitle1}>{street}</Text>
       <Image style={styles.image} source={require('../assets/images/markerMaps.png')}/>
       <Text style={styles.subtitle2}>Vous pouvez dès à présent scanner votre livre</Text>
-      <Pressable style={styles.maps}>
-        <Link href={{ pathname: 'QrcodeScan', params: { pathname: 'ReturnBook' }}} style={styles.text}><MaterialCommunityIcons name="book-arrow-left" size={24}/> RENDRE UN LIVRE</Link>
-      </Pressable>
       <Pressable style={styles.button} onPress={onPress}>
         <Link href={{ pathname: 'QrcodeScan', params: { pathname: 'Book' }}} style={styles.text}><MaterialCommunityIcons name="book-open-variant" size={24}/> {title}</Link>
+      </Pressable>
+      <Pressable style={styles.maps}>
+        <Link href={{ pathname: 'QrcodeScan', params: { pathname: 'ReturnBook' }}} style={styles.text}><MaterialCommunityIcons name="book-arrow-left" size={24}/> RENDRE UN LIVRE</Link>
       </Pressable>
       <Pressable style={styles.previous}>
         <Link href={{ pathname: 'Maps', params: { pathname: 'Maps' }}} style={styles.text}><Ionicons name="ios-arrow-back-circle-sharp" size={24}/> RETOUR EN ARRIÈRE</Link>
@@ -115,6 +115,53 @@ const styles = StyleSheet.create({
     color: '#fff',
   },
 
+  button: {
+    width: '76%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#008fd1',
+    marginTop: 40,
+    marginBottom: -6,
+    padding: '2%',
+    borderRadius: '5%',
+    padding: 10,
+    elevation: 3,
+    shadowColor: "#000000",
+        shadowOffset: {
+          width: 0,
+          height: 0,
+        },
+        shadowOpacity:  0.99,
+        shadowRadius: 3.05,
+  },
+
+  text: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    letterSpacing: 0.25,
+    color: '#fff',
+  },
+
+  button: {
+    width: '76%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#008fd1',
+    marginTop: 40,
+    marginBottom: -6,
+    padding: '2%',
+    borderRadius: '5%',
+    padding: 10,
+    elevation: 3,
+    shadowColor: "#000000",
+        shadowOffset: {
+          width: 0,
+          height: 0,
+        },
+        shadowOpacity:  0.99,
+        shadowRadius: 3.05,
+  },
+
   maps: {
     width: 285,
     fontSize: 20,
@@ -143,8 +190,8 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: 95,
-    marginTop: -160,
+    marginBottom: 100,
+    marginTop: 115,
     padding: 10,
     letterSpacing: 0.25,
     backgroundColor: 'green',

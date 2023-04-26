@@ -11,7 +11,7 @@ export default function Button(props) {
   const { onPress, title = 'SCANNER VOTRE BOX' } = props;
 
   const [users, setUser] = useState([]);
-  const url = "https://clean-badgers-care-193-252-172-28.loca.lt";
+  const url = "https://mean-heads-flow-193-252-172-28.loca.lt";
 
     useEffect(() => {
         fetch(url + "/api/v1/user/login?uuid=d4cab748-3224-49c3-a25d-4edfb39b1fd3"
@@ -75,6 +75,13 @@ const styles = StyleSheet.create({
     height: 300,
   },
 
+  text: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    letterSpacing: 0.25,
+    color: '#fff',
+  },
+
   button: {
     width: '76%',
     alignItems: 'center',
@@ -93,13 +100,6 @@ const styles = StyleSheet.create({
         },
         shadowOpacity:  0.99,
         shadowRadius: 3.05,
-  },
-
-  text: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    letterSpacing: 0.25,
-    color: '#fff',
   },
 
   maps: {
