@@ -4,16 +4,16 @@ import { Link } from "expo-router";
 import { useSearchParams } from "expo-router";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
+import { url } from '../components/url';
 
 
 export default function Button(props) {
   const { onPress, title = 'EMPRUNTER UN LIVRE' } = props;
-  const { id } = useSearchParams();
+  const { id, idBox } = useSearchParams();
 
   // SCANNER LE LIVRE POUR LE REMETTRE DANS BOÎTE À LIVRE
   const [book, setBook] = useState([]);
   const [returnBook, setReturnBook] = useState([]);
-  const url = "https://mean-heads-flow-193-252-172-28.loca.lt";
 
     useEffect(() => {
         fetch(url + "/api/v1/bookReturn/" + id
@@ -32,6 +32,7 @@ export default function Button(props) {
     }, []);
 
 
+
     // AFFICHER LE TITRE DU LIVRE
     useEffect(() => {
         fetch(url + "/api/v1/bookInfo?id=" + id
@@ -48,7 +49,7 @@ export default function Button(props) {
             })
             .catch((error) => console.error(error));
     }, []);
-
+console.log(idBox);
 
   return (
     <View style={styles.background}>
@@ -61,7 +62,7 @@ export default function Button(props) {
         <Link href={{ pathname: 'QrcodeScan', params: { pathname: 'Book' }}} style={styles.text}><MaterialCommunityIcons name="book-open-variant" size={24}/> {title}</Link>
       </Pressable>
       <Pressable style={styles.previous}>
-        <Link href={{ pathname: 'Box', params: { pathname: 'Box' }}} style={styles.text}><Ionicons name="ios-arrow-back-circle-sharp" size={24}/> RETOUR EN ARRIÈRE</Link>
+        <Link href={{ pathname: 'Box', params: { pathname: 'Box', id: idBox }}} style={styles.text}><Ionicons name="ios-arrow-back-circle-sharp" size={24}/> RETOUR EN ARRIÈRE</Link>
       </Pressable>
     </View>
   );

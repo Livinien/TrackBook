@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     flex: 0,
     alignItems: "center",
     justifyContent: "center",
-    marginTop: 150,
+    marginTop: 70,
     fontSize: 54,
     fontWeight: "bold",
     shadowColor: "#000000",

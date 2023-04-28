@@ -10,7 +10,7 @@ import { Link } from 'expo-router';
 export default function App() {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
-  const {pathname} = useSearchParams();
+  const { pathname, idBox } = useSearchParams();
   const router = useRouter();
 
   useEffect(() => {
@@ -24,7 +24,7 @@ export default function App() {
 
   const handleBarCodeScanned = ({ type, data }) => {
     setScanned(true);
-    router.push({ pathname: pathname, params: { id: data } });
+    router.push({ pathname: pathname, params: { id: data, idBox: idBox } });
   };
 
   if (hasPermission === null) {

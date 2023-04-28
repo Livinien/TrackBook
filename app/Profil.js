@@ -4,6 +4,7 @@ import { Link } from "expo-router";
 import { AntDesign } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
+import { url } from '../components/url';
 
 
 // ACCÈS À LA PAGE PROFIL DE L'UTILISATEUR POUR SCANNER LE QRCODE DE LA BOX
@@ -11,7 +12,6 @@ export default function Button(props) {
   const { onPress, title = 'SCANNER VOTRE BOX' } = props;
 
   const [users, setUser] = useState([]);
-  const url = "https://mean-heads-flow-193-252-172-28.loca.lt";
 
     useEffect(() => {
         fetch(url + "/api/v1/user/login?uuid=d4cab748-3224-49c3-a25d-4edfb39b1fd3"

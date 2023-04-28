@@ -4,13 +4,12 @@ import { StyleSheet, View, Text, Image } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import { Link } from 'expo-router';
 import * as Location from 'expo-location';
-
+import { url } from '../components/url';
 
 // CARTE DE L'EMPLACEMENT DE LA BOITE À LIVRE
 export default function App() {
 
   const [markers, setMarker] = useState([]);
-  const url = "https://mean-heads-flow-193-252-172-28.loca.lt";
 
     useEffect(() => {
         fetch(url + "/api/v1/box/get"
@@ -90,9 +89,9 @@ export default function App() {
             <Callout tooltip>
               <View>
                 <View style={styles.bubble}>
-                  <Link href={{ pathname: 'MarkerMaps', params: { pathname: 'MarkerMaps', street: marker.title }}}><Text style={styles.name}>{marker.title}</Text></Link>
+                  <Link href={{ pathname: 'MarkerMaps', params: { pathname: 'MarkerMaps', id: marker.id }}}><Text style={styles.name}>{marker.title}</Text></Link>
                   
-                  <Link href={{ pathname: 'MarkerMaps', params: { pathname: 'MarkerMaps', street: marker.title }}} style={styles.imageLink}><Image 
+                  <Link href={{ pathname: 'MarkerMaps', params: { pathname: 'MarkerMaps', id: marker.id }}} style={styles.imageLink}><Image 
                   style={styles.image}
                   source={require('../assets/images/markerImage.png')}
                   /></Link>

@@ -5,14 +5,15 @@ import { Image } from 'expo-image';
 import { useSearchParams } from "expo-router";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
+import { url } from '../components/url';
+
 
 // SCANNER UN AUTRE LIVRE
 export default function Button(props) {
   const { onPress, title = 'RESCANNER UN LIVRE' } = props;
-  const { id } = useSearchParams();
+  const { id, idBox } = useSearchParams();
 
   const [book, setBook] = useState([]);
-  const url = "https://mean-heads-flow-193-252-172-28.loca.lt";
 
     // EMPRUNTER UN LIVRE
     useEffect(() => {
@@ -45,12 +46,13 @@ export default function Button(props) {
             })
             .catch((error) => console.error(error));
     }, []);
+    
 
   return (
     <View style={styles.background}>
       <Text style={styles.title1}>Vous avez scanner le livre :</Text>
       <Text style={styles.title2}>{book.title}</Text>
-      <Image style={styles.image} source={"https://mean-heads-flow-193-252-172-28.loca.lt/assets/uploads/" + book.cover}/>
+      <Image style={styles.image} source={url + "/assets/uploads/" + book.cover}/>
       <Pressable style={styles.button} onPress={onPress}>
         <Link href={{ pathname: 'QrcodeScan', params: { pathname: 'Book' }}} style={styles.text}><MaterialCommunityIcons name="book-open-variant" size={24}/> {title}</Link>
       </Pressable>
@@ -58,7 +60,7 @@ export default function Button(props) {
         <Link href={{ pathname: 'QrcodeScan', params: { pathname: 'ReturnBook' }}} style={styles.text}><MaterialCommunityIcons name="book-arrow-left" size={24}/> RENDRE UN LIVRE</Link>
       </Pressable>
       <Pressable style={styles.previous}>
-        <Link href={{ pathname: 'Box', params: { pathname: 'Box' }}} style={styles.text}><Ionicons name="ios-arrow-back-circle-sharp" size={24}/> RETOUR EN ARRIÈRE</Link>
+        <Link href={{ pathname: 'Box', params: { pathname: 'Box', id: idBox }}} style={styles.text}><Ionicons name="ios-arrow-back-circle-sharp" size={24}/> RETOUR EN ARRIÈRE</Link>
       </Pressable>
     </View>
   );
