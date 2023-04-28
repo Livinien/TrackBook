@@ -54,10 +54,10 @@ export default function Button(props) {
       <Text style={styles.title2}>{book.title}</Text>
       <Image style={styles.image} source={url + "/assets/uploads/" + book.cover}/>
       <Pressable style={styles.button} onPress={onPress}>
-        <Link href={{ pathname: 'QrcodeScan', params: { pathname: 'Book' }}} style={styles.text}><MaterialCommunityIcons name="book-open-variant" size={24}/> {title}</Link>
+        <Link href={{ pathname: 'QrcodeScan', params: { pathname: 'Book', idBox: idBox }}} style={styles.text}><MaterialCommunityIcons name="book-open-variant" size={24}/> {title}</Link>
       </Pressable>
       <Pressable style={styles.maps}>
-        <Link href={{ pathname: 'QrcodeScan', params: { pathname: 'ReturnBook' }}} style={styles.text}><MaterialCommunityIcons name="book-arrow-left" size={24}/> RENDRE UN LIVRE</Link>
+        <Link href={{ pathname: 'QrcodeScan', params: { pathname: 'ReturnBook', idBox: idBox }}} style={styles.text}><MaterialCommunityIcons name="book-arrow-left" size={24}/> RENDRE UN LIVRE</Link>
       </Pressable>
       <Pressable style={styles.previous}>
         <Link href={{ pathname: 'Box', params: { pathname: 'Box', id: idBox }}} style={styles.text}><Ionicons name="ios-arrow-back-circle-sharp" size={24}/> RETOUR EN ARRIÈRE</Link>

@@ -12,7 +12,7 @@ export default function Button(props) {
   const { onPress, title = 'EMPRUNTER UN LIVRE' } = props;
   const { id } = useSearchParams();
 
-console.log(id);
+  
   const [box, setBox] = useState([]);
 
     useEffect(() => {
