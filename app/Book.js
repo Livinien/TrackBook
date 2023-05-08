@@ -11,7 +11,7 @@ import { url } from '../components/url';
 // SCANNER UN AUTRE LIVRE
 export default function Button(props) {
   const { onPress, title = 'RESCANNER UN LIVRE' } = props;
-  const { id, idBox } = useSearchParams();
+  const { id, idBox, lastId } = useSearchParams();
 
   const [book, setBook] = useState([]);
 
@@ -50,7 +50,7 @@ export default function Button(props) {
 
   return (
     <View style={styles.background}>
-      <Text style={styles.title1}>Vous avez scanner le livre :</Text>
+      <Text style={styles.title1}>Vous avez scanné le livre :</Text>
       <Text style={styles.title2}>{book.title}</Text>
       <Image style={styles.image} source={url + "/assets/uploads/" + book.cover}/>
       <Pressable style={styles.button} onPress={onPress}>
@@ -60,7 +60,7 @@ export default function Button(props) {
         <Link href={{ pathname: 'QrcodeScan', params: { pathname: 'ReturnBook', idBox: idBox }}} style={styles.text}><MaterialCommunityIcons name="book-arrow-left" size={24}/> RENDRE UN LIVRE</Link>
       </Pressable>
       <Pressable style={styles.previous}>
-        <Link href={{ pathname: 'Box', params: { pathname: 'Box', id: idBox }}} style={styles.text}><Ionicons name="ios-arrow-back-circle-sharp" size={24}/> RETOUR EN ARRIÈRE</Link>
+        <Link href={{ pathname: 'Box', params: { pathname: 'Box', id: idBox, lastId }}} style={styles.text}><Ionicons name="ios-arrow-back-circle-sharp" size={24}/> RETOUR EN ARRIÈRE</Link>
       </Pressable>
     </View>
   );

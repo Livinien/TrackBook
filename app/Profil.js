@@ -1,20 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Pressable, Image } from 'react-native';
-import { Link } from "expo-router";
+import { Link, useSearchParams } from "expo-router";
 import { AntDesign } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import { url } from '../components/url';
 
 
+
 // ACCÈS À LA PAGE PROFIL DE L'UTILISATEUR POUR SCANNER LE QRCODE DE LA BOX
+
 export default function Button(props) {
   const { onPress, title = 'SCANNER VOTRE BOX' } = props;
+  const { id } = useSearchParams();
 
   const [users, setUser] = useState([]);
 
     useEffect(() => {
-        fetch(url + "/api/v1/user/login?uuid=d4cab748-3224-49c3-a25d-4edfb39b1fd3"
+        fetch(url + "/api/v1/user/login?uuid=" + id
             , {
                 method: 'GET',
                 headers: {
@@ -28,6 +31,7 @@ export default function Button(props) {
             })
             .catch((error) => console.error(error));
     }, []);
+console.log(users);
 
 
   return (
@@ -36,10 +40,10 @@ export default function Button(props) {
       <Text style={styles.subtitle}>Vous pouvez dès à présent scanner votre box</Text>
       <Image style={styles.image} source={require('../assets/images/profil.png')}/>
       <Pressable style={styles.maps}>
-        <Link href={{ pathname: 'Maps', params: { pathname: 'Maps' }}} style={styles.text}><AntDesign name="enviroment" size={24}/> TROUVER VOTRE BOX</Link>
+        <Link href={{ pathname: 'Maps', params: { pathname: 'Maps', lastId: id }}} style={styles.text}><AntDesign name="enviroment" size={24}/> TROUVER VOTRE BOX</Link>
       </Pressable>
       <Pressable style={styles.button} onPress={onPress}>
-        <Link href={{ pathname: 'QrcodeScan', params: { pathname: 'Box' }}} style={styles.text}><MaterialCommunityIcons name="book-open-variant" size={24}/> {title}</Link>
+        <Link href={{ pathname: 'QrcodeScan', params: { pathname: 'Box', lastId: id }}} style={styles.text}><MaterialCommunityIcons name="book-open-variant" size={24}/> {title}</Link>
       </Pressable>
       <Pressable style={styles.previous}>
         <Link href={{ params: { pathname: 'index' }}} style={styles.text}><Ionicons name="ios-arrow-back-circle-sharp" size={24}/> RETOUR EN ARRIÈRE</Link>

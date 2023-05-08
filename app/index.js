@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, Pressable, Image } from 'react-native';
 import { Link } from "expo-router";
 import { FontAwesome5 } from '@expo/vector-icons';
 
+
 // ACCUEIL DE L'APPLICATION
 export default function Button(props) {
   const { onPress, title = 'CONNECTEZ-VOUS' } = props;

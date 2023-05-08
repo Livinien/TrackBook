@@ -11,7 +11,6 @@ import { url } from '../components/url';
 export default function Button(props) {
   const { onPress, title = 'EMPRUNTER UN LIVRE' } = props;
   const { id } = useSearchParams();
-  const { street } = useSearchParams();
 
 
   const [box, setBox] = useState([]);
@@ -36,11 +35,11 @@ export default function Button(props) {
   return (
     <View style={styles.background}>
       <Text style={styles.title}>Vous êtes à la box :</Text>
-      <Text style={styles.subtitle1}>{box.street}</Text>
+      <Text style={styles.subtitle1}>{box.street} {box.city} {box.zipcode}</Text>
       <Image style={styles.image} source={require('../assets/images/markerMaps.png')}/>
       <Text style={styles.subtitle2}>Vous pouvez dès à présent scanner votre livre</Text>
       <Pressable style={styles.button} onPress={onPress}>
-        <Link href={{ pathname: 'QrcodeScan', params: { pathname: 'Book', idBox: box.id }}} style={styles.text}><MaterialCommunityIcons name="book-open-variant" size={24}/> {title}</Link>
+        <Link href={{ pathname: 'QrcodeScan', params: { pathname: 'Book', idBox: box.id, }}} style={styles.text}><MaterialCommunityIcons name="book-open-variant" size={24}/> {title}</Link>
       </Pressable>
       <Pressable style={styles.maps}>
         <Link href={{ pathname: 'QrcodeScan', params: { pathname: 'ReturnBook', idBox: box.id }}} style={styles.text}><MaterialCommunityIcons name="book-arrow-left" size={24}/> RENDRE UN LIVRE</Link>

@@ -2,12 +2,15 @@ import React, {useEffect, useState} from 'react';
 import MapView, {Callout, Marker} from 'react-native-maps';
 import { StyleSheet, View, Text, Image } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
+import { useSearchParams } from "expo-router";
 import { Link } from 'expo-router';
 import * as Location from 'expo-location';
 import { url } from '../components/url';
 
 // CARTE DE L'EMPLACEMENT DE LA BOITE À LIVRE
 export default function App() {
+
+  const { lastId } = useSearchParams();
 
   const [markers, setMarker] = useState([]);
 
@@ -74,7 +77,7 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <Link href={{ pathname: 'Profil', params: { pathname: 'Profil' }}} style={styles.link}><AntDesign style={styles.arrow} name="leftcircleo" size={50}/></Link>
+      <Link href={{ pathname: 'Profil', params: { pathname: 'Profil', id: lastId }}} style={styles.link}><AntDesign style={styles.arrow} name="leftcircleo" size={50}/></Link>
       <MapView style={styles.map}
         region={mapRegion}
       >
@@ -89,13 +92,12 @@ export default function App() {
             <Callout tooltip>
               <View>
                 <View style={styles.bubble}>
-                  <Link href={{ pathname: 'MarkerMaps', params: { pathname: 'MarkerMaps', id: marker.id }}}><Text style={styles.name}>{marker.title}</Text></Link>
+                  <Link href={{ pathname: 'BoxMaps', params: { pathname: 'BoxMaps', id: marker.id }}}><Text style={styles.name}>{marker.title}</Text></Link>
                   
-                  <Link href={{ pathname: 'MarkerMaps', params: { pathname: 'MarkerMaps', id: marker.id }}} style={styles.imageLink}><Image 
+                  <Link href={{ pathname: 'BoxMaps', params: { pathname: 'BoxMaps', id: marker.id }}} style={styles.imageLink}><Image 
                   style={styles.image}
                   source={require('../assets/images/markerImage.png')}
                   /></Link>
-                  
                 </View>
                 <View style={styles.arrowBorder1}></View>
               </View>

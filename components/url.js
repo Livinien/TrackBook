@@ -1,1 +1,1 @@
-export const url = "https://breezy-onions-shake-193-252-172-28.loca.lt";
+export const url = "https://tired-aliens-ring.loca.lt";
