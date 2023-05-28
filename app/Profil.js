@@ -31,7 +31,7 @@ export default function Button(props) {
             })
             .catch((error) => console.error(error));
     }, []);
-console.log(users);
+console.log(id);
 
 
   return (

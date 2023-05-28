@@ -74,7 +74,7 @@ export default function App() {
     useEffect(() => {
         userLocation();
     })
-
+console.log(lastId);
   return (
     <View style={styles.container}>
       <Link href={{ pathname: 'Profil', params: { pathname: 'Profil', id: lastId }}} style={styles.link}><AntDesign style={styles.arrow} name="leftcircleo" size={50}/></Link>
@@ -92,9 +92,9 @@ export default function App() {
             <Callout tooltip>
               <View>
                 <View style={styles.bubble}>
-                  <Link href={{ pathname: 'BoxMaps', params: { pathname: 'BoxMaps', id: marker.id }}}><Text style={styles.name}>{marker.title}</Text></Link>
+                  <Link href={{ pathname: 'BoxMaps', params: { pathname: 'BoxMaps', id: marker.id, lastId: lastId }}}><Text style={styles.name}>{marker.title}</Text></Link>
                   
-                  <Link href={{ pathname: 'BoxMaps', params: { pathname: 'BoxMaps', id: marker.id }}} style={styles.imageLink}><Image 
+                  <Link href={{ pathname: 'BoxMaps', params: { pathname: 'BoxMaps', id: marker.id, lastId: lastId }}} style={styles.imageLink}><Image 
                   style={styles.image}
                   source={require('../assets/images/markerImage.png')}
                   /></Link>

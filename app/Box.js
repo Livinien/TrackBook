@@ -12,6 +12,7 @@ export default function Button(props) {
   const { onPress, title = 'EMPRUNTER UN LIVRE' } = props;
   const { id, lastId } = useSearchParams();
 
+  
   const [box, setBox] = useState([]);
 
     useEffect(() => {
@@ -31,24 +32,24 @@ export default function Button(props) {
     }, []);
 
 
-  return (
-    <View style={styles.background}>
-      <Text style={styles.title}>Vous avez scanné la box :</Text>
-      <Text style={styles.subtitle1}>{box.street} {box.city} {box.zipcode}</Text>
-      <Image style={styles.image} source={require('../assets/images/boite_a_livre.png')}/>
-      <Text style={styles.subtitle2}>Vous pouvez dès à présent scanner votre livre</Text>
-      <Pressable style={styles.button} onPress={onPress}>
-        <Link href={{ pathname: 'QrcodeScan', params: { pathname: 'Book', idBox: box.id, lastId: lastId }}} style={styles.text}><MaterialCommunityIcons name="book-open-variant" size={24}/> {title}</Link>
-      </Pressable>
-      <Pressable style={styles.maps}>
-        <Link href={{ pathname: 'QrcodeScan', params: { pathname: 'ReturnBook', idBox: box.id, id: lastId }}} style={styles.text}><MaterialCommunityIcons name="book-arrow-left" size={24}/> RENDRE UN LIVRE</Link>
-      </Pressable>
-      <Pressable style={styles.previous}>
-        <Link href={{ pathname: 'Profil', params: { pathname: 'Profil', id: lastId }}} style={styles.text}><Ionicons name="ios-arrow-back-circle-sharp" size={24}/> RETOUR EN ARRIÈRE</Link>
-      </Pressable>
-    </View>
-  );
-}
+    return (
+      <View style={styles.background}>
+        <Text style={styles.title}>Vous avez scanné la box :</Text>
+        <Text style={styles.subtitle1}>{box.street} {box.city} {box.zipcode}</Text>
+        <Image style={styles.image} source={require('../assets/images/boite_a_livre.png')}/>
+        <Text style={styles.subtitle2}>Vous pouvez dès à présent scanner votre livre</Text>
+        <Pressable style={styles.button} onPress={onPress}>
+          <Link href={{ pathname: 'QrcodeScan', params: { pathname: 'Book', idBox: box.id, lastId: lastId }}} style={styles.text}><MaterialCommunityIcons name="book-open-variant" size={24}/> {title}</Link>
+        </Pressable>
+        <Pressable style={styles.maps}>
+          <Link href={{ pathname: 'QrcodeScan', params: { pathname: 'ReturnBook', idBox: box.id, lastId: lastId }}} style={styles.text}><MaterialCommunityIcons name="book-arrow-left" size={24}/> RENDRE UN LIVRE</Link>
+        </Pressable>
+        <Pressable style={styles.previous}>
+          <Link href={{ pathname: 'Profil', params: { pathname: 'Profil', id: lastId }}} style={styles.text}><Ionicons name="ios-arrow-back-circle-sharp" size={24}/> RETOUR EN ARRIÈRE</Link>
+        </Pressable>
+      </View>
+    );
+  }
 
 const styles = StyleSheet.create({
 

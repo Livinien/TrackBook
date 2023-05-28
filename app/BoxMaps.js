@@ -10,7 +10,7 @@ import { url } from '../components/url';
 // SCANNER LA BOÎTE À LIVRE
 export default function Button(props) {
   const { onPress, title = 'EMPRUNTER UN LIVRE' } = props;
-  const { id } = useSearchParams();
+  const { id, lastId } = useSearchParams();
 
 
   const [box, setBox] = useState([]);
@@ -30,7 +30,7 @@ export default function Button(props) {
             })
             .catch((error) => console.error(error));
     }, []);
-
+console.log(lastId);
 
   return (
     <View style={styles.background}>
@@ -39,13 +39,13 @@ export default function Button(props) {
       <Image style={styles.image} source={require('../assets/images/markerMaps.png')}/>
       <Text style={styles.subtitle2}>Vous pouvez dès à présent scanner votre livre</Text>
       <Pressable style={styles.button} onPress={onPress}>
-        <Link href={{ pathname: 'QrcodeScan', params: { pathname: 'Book', idBox: box.id, }}} style={styles.text}><MaterialCommunityIcons name="book-open-variant" size={24}/> {title}</Link>
+        <Link href={{ pathname: 'QrcodeScan', params: { pathname: 'Book', idBox: box.id, lastId: lastId }}} style={styles.text}><MaterialCommunityIcons name="book-open-variant" size={24}/> {title}</Link>
       </Pressable>
       <Pressable style={styles.maps}>
-        <Link href={{ pathname: 'QrcodeScan', params: { pathname: 'ReturnBook', idBox: box.id }}} style={styles.text}><MaterialCommunityIcons name="book-arrow-left" size={24}/> RENDRE UN LIVRE</Link>
+        <Link href={{ pathname: 'QrcodeScan', params: { pathname: 'ReturnBook', idBox: box.id, lastId: lastId }}} style={styles.text}><MaterialCommunityIcons name="book-arrow-left" size={24}/> RENDRE UN LIVRE</Link>
       </Pressable>
       <Pressable style={styles.previous}>
-        <Link href={{ pathname: 'Maps', params: { pathname: 'Maps' }}} style={styles.text}><Ionicons name="ios-arrow-back-circle-sharp" size={24}/> RETOUR EN ARRIÈRE</Link>
+        <Link href={{ pathname: 'Maps', params: { pathname: 'Maps', lastId: lastId }}} style={styles.text}><Ionicons name="ios-arrow-back-circle-sharp" size={24}/> RETOUR EN ARRIÈRE</Link>
       </Pressable>
     </View>
   );
